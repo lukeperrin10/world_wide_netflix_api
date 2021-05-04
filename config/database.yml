@@ -8,6 +8,10 @@ development:
   <<: *default
   username: postgres
   database: world_wide_netflix_api_development
+test:
+  <<: *default
+  username: postgres
+  database: world_wide_netflix_api_test
 
 production:
   <<: *default
