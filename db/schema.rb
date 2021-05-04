@@ -1,3 +1,6 @@
 ActiveRecord::Schema.define(version: 0) do
-  enable_extension 'plpgsql'
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
 end
