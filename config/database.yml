@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  username: postgres
+  database: world_wide_netflix_api_development
+
+production:
+  <<: *default
+  database: world_wide_netflix_api_production
+  username: world_wide_netflix_api
+  password: <%= ENV['WORLD_WIDE_NETFLIX_API_DATABASE_PASSWORD'] %>
