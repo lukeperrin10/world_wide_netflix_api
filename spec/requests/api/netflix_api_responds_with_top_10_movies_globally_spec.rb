@@ -13,5 +13,9 @@ RSpec.describe 'GET /api/movies', type: :request do
     it 'is expected to respond 200' do
       expect(response).to have_http_status 200
     end
+
+    it 'filter top 10 movies globally' do
+      expect(response_json["body"].count).to eq 10
+    end
   end
 end
