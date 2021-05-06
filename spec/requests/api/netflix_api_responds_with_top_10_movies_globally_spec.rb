@@ -26,4 +26,17 @@ RSpec.describe 'GET /api/movies', type: :request do
       expect(response_json['body']).to eq JSON.parse(filtered_top_10)['results']
     end
   end
+  describe 'Unsuccesfull' do
+    before do
+      stub_request(:get, 'https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating')
+        .to_return(status: 500, body: nil)
+      get '/api/movies'
+    end
+     it 'is expected to respond 500' do
+      expect(response).to have_http_status 500
+    end
+    it 'is expected to have a message' do
+      expect(response_json['error']).to eq "500 Internal Server Error |  0 bytes\n"
+  end
+ end
 end
