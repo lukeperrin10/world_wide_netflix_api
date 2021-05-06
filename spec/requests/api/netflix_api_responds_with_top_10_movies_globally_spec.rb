@@ -39,6 +39,18 @@ RSpec.describe 'GET /api/movies', type: :request do
         .to_return(status: 200, body: top_100_response)
       get '/api/movies'
     end
+
+    it 'is expected to respond 200' do
+      expect(response).to have_http_status 200
+    end
+
+    it 'is expected to determine visitors country as russia' do
+      expect(response_json['body'])
+    end
+
+    it 'is expected to respond with top 10 movies thats not available in russia' do
+      expect()
+    end
   end
 
   describe 'Unsuccesfull' do
