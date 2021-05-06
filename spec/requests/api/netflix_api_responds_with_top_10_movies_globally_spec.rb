@@ -23,7 +23,7 @@ RSpec.describe 'GET /api/movies', type: :request do
     end
 
     it 'is expected to return filter low Netflix rating movies' do
-      expect(response_json['body']).to eq JSON.parse(filtered_top_10)
+      expect(response_json['body']).to eq JSON.parse(filtered_top_10)['results']
     end
   end
 end
