@@ -1,144 +1,25 @@
 {
-  "documentation": "https://opencagedata.com/api",
-  "licenses": [
-      {
-          "name": "see attribution guide",
-          "url": "https://opencagedata.com/credits"
-      }
-  ],
-  "rate": {
-      "limit": 2500,
-      "remaining": 2474,
-      "reset": 1620345600
-  },
-  "results": [
-      {
-          "annotations": {
-              "DMS": {
-                  "lat": "56° 29' 44.79036'' N",
-                  "lng": "60° 14' 12.19056'' E"
-              },
-              "MGRS": "41VLC2989864681",
-              "Maidenhead": "MO06cl88jx",
-              "Mercator": {
-                  "x": 6705520.955,
-                  "y": 7622091.585
-              },
-              "OSM": {
-                  "edit_url": "https://www.openstreetmap.org/edit?way=96778420#map=16/56.49578/60.23672",
-                  "note_url": "https://www.openstreetmap.org/note/new#map=16/56.49578/60.23672&layers=N",
-                  "url": "https://www.openstreetmap.org/?mlat=56.49578&mlon=60.23672#map=16/56.49578/60.23672"
-              },
-              "UN_M49": {
-                  "regions": {
-                      "EASTERN_EUROPE": "151",
-                      "EUROPE": "150",
-                      "RU": "643",
-                      "WORLD": "001"
-                  },
-                  "statistical_groupings": [
-                      "MEDC"
-                  ]
-              },
-              "callingcode": 7,
-              "currency": {
-                  "alternate_symbols": [
-                      "руб.",
-                      "р."
-                  ],
-                  "decimal_mark": ",",
-                  "format": "%n %u",
-                  "html_entity": "&#x20BD;",
-                  "iso_code": "RUB",
-                  "iso_numeric": "643",
-                  "name": "Russian Ruble",
-                  "smallest_denomination": 1,
-                  "subunit": "Kopeck",
-                  "subunit_to_unit": 100,
-                  "symbol": "₽",
-                  "symbol_first": 0,
-                  "thousands_separator": "."
-              },
-              "flag": "🇷🇺",
-              "geohash": "v64c6sxp9rc9e6e2dgpt",
-              "qibla": 211.69,
-              "roadinfo": {
-                  "drive_on": "right",
-                  "road": "улица Ленина",
-                  "speed_in": "km/h"
-              },
-              "sun": {
-                  "rise": {
-                      "apparent": 1620259440,
-                      "astronomical": 0,
-                      "civil": 1620343020,
-                      "nautical": 1620338940
-                  },
-                  "set": {
-                      "apparent": 1620316140,
-                      "astronomical": 0,
-                      "civil": 1620319020,
-                      "nautical": 1620323100
-                  }
-              },
-              "timezone": {
-                  "name": "Asia/Yekaterinburg",
-                  "now_in_dst": 0,
-                  "offset_sec": 18000,
-                  "offset_string": "+0500",
-                  "short_name": "+05"
-              },
-              "what3words": {
-                  "words": "aspire.illustrating.quid"
-              }
-          },
-          "bounds": {
-              "northeast": {
-                  "lat": 56.4963718,
-                  "lng": 60.2375656
-              },
-              "southwest": {
-                  "lat": 56.4953753,
-                  "lng": 60.2357572
-              }
-          },
-          "components": {
-              "ISO_3166-1_alpha-2": "RU",
-              "ISO_3166-1_alpha-3": "RUS",
-              "_category": "transportation",
-              "_type": "parking",
-              "continent": "Europe",
-              "country": "Russia",
-              "country_code": "ru",
-              "county": "Полевской городской округ",
-              "parking": "площадь В.И.Ленина",
-              "postcode": "623380",
-              "region": "Ural Federal District",
-              "road": "улица Ленина",
-              "state": "Sverdlovsk Oblast",
-              "suburb": "микрорайон Ялунина",
-              "town": "Polevskoy"
-          },
-          "confidence": 9,
-          "formatted": "площадь В.И.Ленина, улица Ленина, микрорайон Ялунина, Polevskoy, Sverdlovsk Oblast, Russia, 623380",
-          "geometry": {
-              "lat": 56.4957751,
-              "lng": 60.2367196
-          }
-      }
-  ],
-  "status": {
-      "code": 200,
-      "message": "OK"
-  },
-  "stay_informed": {
-      "blog": "https://blog.opencagedata.com",
-      "twitter": "https://twitter.com/OpenCage"
-  },
-  "thanks": "For using an OpenCage API",
-  "timestamp": {
-      "created_http": "Thu, 06 May 2021 17:40:11 GMT",
-      "created_unix": 1620322811
-  },
-  "total_results": 1
+    "place_id": 42215472,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 3185256527,
+    "lat": "55.78414",
+    "lon": "12.451736",
+    "display_name": "193A, Hummeltoftevej, Frederiksdal, Lyngby-Taarbæk Municipality, Capital Region of Denmark, 2830, Denmark",
+    "address": {
+        "house_number": "193A",
+        "road": "Hummeltoftevej",
+        "hamlet": "Frederiksdal",
+        "municipality": "Lyngby-Taarbæk Municipality",
+        "state": "Capital Region of Denmark",
+        "postcode": "2830",
+        "country": "Denmark",
+        "country_code": "dk"
+    },
+    "boundingbox": [
+        "55.78409",
+        "55.78419",
+        "12.451686",
+        "12.451786"
+    ]
 }

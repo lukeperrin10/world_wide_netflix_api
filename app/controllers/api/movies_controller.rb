@@ -6,12 +6,16 @@ class Api::MoviesController < ApplicationController
       if params.has_key?(:lat) && params.has_key?(:long)
         results = Geocoder.search([params[:lat], params[:long]])
         country = results.first.country
-        binding.pry
 
+        response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
+                                  headers = { 'x-rapidapi-key': netflix })
+        results = JSON.parse(response)['results'].select { |film| film['clist'] != country }
+        binding.pry
       elsif response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
                                       headers = { 'x-rapidapi-key': netflix })
 
         results = JSON.parse(response)['results'].select { |film| film['avgrating'] > 4 }
+
         netflix_sorted = results.sort_by { |film| film['avgrating'] }.reverse
         render json: { body: netflix_sorted[0..9] }, status: 200
 
