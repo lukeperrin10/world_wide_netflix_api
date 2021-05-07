@@ -12,6 +12,7 @@ class Api::MoviesController < ApplicationController
         movie_array = JSON.parse(response.body)['results']
 
         movie_results = movie_array.select { |movie| !movie['clist'].include?(country) }
+        render json: { body: movie_results[0..9]}, status: 200
 
       elsif response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
                                       headers = { 'x-rapidapi-key': netflix })

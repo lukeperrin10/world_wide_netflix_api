@@ -18,8 +18,6 @@ RSpec.describe 'GET /api/movies/' do
     expect(response).to have_http_status 200
   end
   it 'is expected to return list of 10 movies' do
-    binding.pry
-
     expect(response_json['body'].count).to eq 10
   end
   it 'is expected to show a list of 10 movies from outside the visitors country' do
