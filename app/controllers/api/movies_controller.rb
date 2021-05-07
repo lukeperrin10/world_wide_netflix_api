@@ -6,19 +6,19 @@ class Api::MoviesController < ApplicationController
       if params.has_key?(:lat) && params.has_key?(:long)
         results = Geocoder.search([params[:lat], params[:long]])
         country = results.first.country
-
-        response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
+        binding.pry
+        response = RestClient.get("https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating",
                                   headers = { 'x-rapidapi-key': netflix })
         results = JSON.parse(response)['results'].select { |film| film['clist'] != country }
+        # movie_array = JSON.parse(response.body)["body"]
+        # movie_results = movie_array.select { |movie| movie["clist"].include?(country) }
         binding.pry
-      elsif response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
+      elsif response = RestClient.get("https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating",
                                       headers = { 'x-rapidapi-key': netflix })
+        results = JSON.parse(response)["results"].select { |film| film["avgrating"] > 4 }
 
-        results = JSON.parse(response)['results'].select { |film| film['avgrating'] > 4 }
-
-        netflix_sorted = results.sort_by { |film| film['avgrating'] }.reverse
+        netflix_sorted = results.sort_by { |film| film["avgrating"] }.reverse
         render json: { body: netflix_sorted[0..9] }, status: 200
-
       end
     rescue StandardError => e
       render json: { error: e.response.description }, status: e.response.code

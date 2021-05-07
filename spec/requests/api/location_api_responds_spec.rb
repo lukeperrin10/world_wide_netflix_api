@@ -11,9 +11,16 @@ RSpec.describe 'GET /api/movies/' do
     stub_request(:get, 'https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating')
       .to_return(status: 200, body: top_100_response)
 
-    get '/api/movies'
+    get '/api/movies/?lat=55.7842&lon=12.4518'
   end
   it 'is expected to return status 200' do
     expect(response).to have_http_status 200
+  end
+  it 'is expected to return list of 10 movies' do
+    expect(response_json['body'].count).to eq 10
+  end
+  it 'is expected to show a list of 10 movies from outside the visitors country' do
+    binding.pry
+   expect(response_json['body']).not_to include('Denmark')
   end
 end
