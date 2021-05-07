@@ -5,6 +5,7 @@ RSpec.describe 'GET /api/movies/' do
   let(:top_100_response) do
     file_fixture('top_movie_search_api_response.json').read
   end
+
   before do
     stub_request(:get, 'https://nominatim.openstreetmap.org/reverse?accept-language=en&addressdetails=1&format=json&lat=55.7842&lon=12.4518')
       .to_return(status: 200, body: vistor_location, headers: {})
@@ -20,7 +21,6 @@ RSpec.describe 'GET /api/movies/' do
     expect(response_json['body'].count).to eq 10
   end
   it 'is expected to show a list of 10 movies from outside the visitors country' do
-    binding.pry
-   expect(response_json['body']).not_to include('Denmark')
+    expect(response_json['body']).not_to include('Denmark')
   end
 end
