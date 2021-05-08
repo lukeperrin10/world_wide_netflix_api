@@ -40,7 +40,7 @@ class Api::MoviesController < ApplicationController
     results.sort_by { |film| film['avgrating'] }.reverse
   end
 
-  def user_tier_render(movies_to_render)    
+  def user_tier_render(movies_to_render)  
       render json: { body: movies_to_render }, status: 200    
   end
 
