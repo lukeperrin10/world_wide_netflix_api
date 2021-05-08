@@ -7,7 +7,11 @@ RSpec.describe 'GET /api/movies', type: :request do
     file_fixture('top_10_avgrating_filter.json').read
   end
 
-  describe 'successfully receives top 100 movies globally' do
+  let(:open_cage_response) do
+    file_fixture('visitor_location.json')
+  end
+
+  describe 'successfully receives top 10 movies globally' do
     before do
       stub_request(:get, 'https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating')
         .to_return(status: 200, body: top_100_response)
@@ -27,7 +31,7 @@ RSpec.describe 'GET /api/movies', type: :request do
     end
   end
 
-  describe 'Unsuccesfull' do
+  describe 'Unsuccesfully' do
     before do
       stub_request(:get, 'https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating')
         .to_return(status: 500, body: nil)
@@ -37,7 +41,7 @@ RSpec.describe 'GET /api/movies', type: :request do
     it 'is expected to respond 500' do
       expect(response).to have_http_status 500
     end
-    
+
     it 'is expected to have a message' do
       expect(response_json['error']).to eq "500 Internal Server Error |  0 bytes\n"
     end
