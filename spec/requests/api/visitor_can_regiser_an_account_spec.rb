@@ -8,12 +8,12 @@ RSpec.describe 'POST /api/auth', type: :request do
       }
     end
 
-    it 'is expeced to have status 201' do
-      expect(subject).to have_http_status 201
+    it 'is expeced to have status 200' do
+      expect(response).to have_http_status 200
     end
 
     it 'is expected to return a success message' do
-      expect(response_json).to eq 'Congratulation, you\'ve successfully registered an account'
+      expect(response_json['status']).to eq 'success'
     end
   end
 end
