@@ -8,8 +8,9 @@ class Api::MoviesController < ApplicationController
       response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
                                 headers = { 'x-rapidapi-key': netflix })
       higher_rated_movies = netflix_sort(response)
+      
       if params.has_key?(:lat) && params.has_key?(:lon)
-        country = get_country(params)
+        country = get_country(params)        
         movie_results = higher_rated_movies.select { |movie| !movie['clist'].include?(country) }
         if current_user      
           user_tier_render(movie_results)
