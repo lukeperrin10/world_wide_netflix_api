@@ -9,6 +9,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rest-client'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 gem 'geocoder'
+gem 'devise_token_auth'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
