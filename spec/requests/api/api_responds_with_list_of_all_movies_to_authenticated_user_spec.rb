@@ -33,7 +33,7 @@ RSpec.describe 'GET /api/movies', type: :request do
     end
 
     it 'is expected to return a list of all movies' do
-      expect(response_json['body'].count).to eq 100
+      expect(response_json['body'].count).to eq 25
     end
   end
 end

@@ -1,5 +1,7 @@
 class Api::MoviesController < ApplicationController
-  def index
+  before_action :authenticate_user, only: :user_tier_render
+
+  def index    
     netflix = Rails.application.credentials.unogsng_key
 
     begin
@@ -8,9 +10,10 @@ class Api::MoviesController < ApplicationController
       higher_rated_movies = netflix_sort(response)
       if params.has_key?(:lat) && params.has_key?(:lon)
         country = get_country(params)
-        movie_results = higher_rated_movies.select { |movie| !movie['clist'].include?(country) }
+        movie_results = higher_rated_movies.select { |movie| !movie['clist'].include?(country) }        
+        user_tier_render(movie_results)
         render json: { body: movie_results[0..9] }, status: 200
-      elsif render json: { body: higher_rated_movies[0..9] }, status: 200
+      elsif user_tier_render(higher_rated_movies)
       end
     rescue StandardError => e
       render json: { error: e.response.description }, status: e.response.code
@@ -28,4 +31,13 @@ class Api::MoviesController < ApplicationController
     results = JSON.parse(list_of_movies)['results'].select { |film| film['avgrating'] > 4 }
     results.sort_by { |film| film['avgrating'] }.reverse
   end
+
+  def user_tier_render(movies_to_render)
+      binding.pry
+      render json: { body: movies_to_render }, status: 200    
+  end
+
+
 end
+
+# render json: { body: movies_to_render[0..9] }, status: 200
