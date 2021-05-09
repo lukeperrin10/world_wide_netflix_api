@@ -1,7 +1,6 @@
 RSpec.describe 'GET /api/movies', type: :request do
   let(:user) { create(:user) }
   let(:auth_headers) { user.create_new_auth_token }
-  # let(:subscriber) {true}
   let(:title_search) do
     file_fixture('title_search.json').read
   end
