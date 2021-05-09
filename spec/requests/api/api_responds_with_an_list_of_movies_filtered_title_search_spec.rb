@@ -8,13 +8,13 @@ RSpec.describe 'GET /api/movies', type: :request do
   describe 'Successfully' do
     before do
       stub_request(:get, 'https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating&query=Alien')
-        .to_return(status: 200, body: title_search, headers: {})
-
+      .to_return(status: 200, body: title_search, headers: {})
+      user.update(subscriber: true)
       get '/api/movies', params: {
         query: 'Alien',
       }, headers: auth_headers
     end
-
+    
     it 'is expected to return a http status of 200' do
       expect(response).to have_http_status 200
     end
@@ -28,10 +28,10 @@ RSpec.describe 'GET /api/movies', type: :request do
     before do
       stub_request(:get, 'https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating&query=Alien')
         .to_return(status: 200, body: title_search, headers: {})
-
+        user.update(subscriber: false)
       get '/api/movies', params: {
         query: 'Alien',
-      }
+      }, headers: auth_headers
     end
 
     it 'is expected to return a http status of 401' do

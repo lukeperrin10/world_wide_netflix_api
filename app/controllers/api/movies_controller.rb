@@ -4,7 +4,7 @@ class Api::MoviesController < ApplicationController
 
     begin
       if params.has_key?(:query)
-        if current_user
+        if current_user.subscriber?
           response = RestClient.get("https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating&query=#{params['query']}",
                                     headers = { 'x-rapidapi-key': netflix })
           user_tier_render(JSON.parse(response))
@@ -12,7 +12,6 @@ class Api::MoviesController < ApplicationController
           render json: { error: 'You need to have an account to use this feature' }, status: 401
         end
       else
-        params.has_key?(:lat) && params.has_key?(:lon)
         response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
                                   headers = { 'x-rapidapi-key': netflix })
         higher_rated_movies = netflix_sort(response)

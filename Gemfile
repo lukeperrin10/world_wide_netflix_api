@@ -10,6 +10,8 @@ gem 'rest-client'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 gem 'geocoder'
 gem 'devise_token_auth'
+gem 'pundit'
+gem 'stripe-rails'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -19,6 +21,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'coveralls', require: false
   gem 'webmock'
+  gem 'stripe-ruby-mock', '~> 3.1.0.rc2', require: 'stripe_mock'
 end
 
 group :development do
