@@ -21,7 +21,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'coveralls', require: false
   gem 'webmock'
-  gem 'stripe-ruby-mock', require: 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 3.1.0.rc2', require: 'stripe_mock'
 end
 
 group :development do

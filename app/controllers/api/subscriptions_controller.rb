@@ -7,20 +7,17 @@ class Api::SubscriptionsController < ApplicationController
 
   private
 
-  def perform_payment
-
-    binding.pry
+  def perform_payment    
     customer = Stripe::Customer.create(
       email: current_user.email,
       source: params['stripeToken'],
       description: 'World Wide Netflix Subscription'
     )
-    
 
-    # charge = Stripe::Charge.create(
-    #   customer:
-    #   amount:
-    #   currency:
-    # )
+    charge = Stripe::Charge.create(
+      customer: customer.id,
+      amount: 100*100,
+      currency: 'sek'
+    )
   end
 end
