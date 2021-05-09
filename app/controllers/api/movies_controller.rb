@@ -4,7 +4,7 @@ class Api::MoviesController < ApplicationController
 
     begin
       if params.has_key?(:query)
-        if current_user
+        if current_user.subscriber?
           response = RestClient.get("https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating&query=#{params['query']}",
                                     headers = { 'x-rapidapi-key': netflix })
           user_tier_render(JSON.parse(response))

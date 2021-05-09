@@ -3,6 +3,14 @@ class Api::SubscriptionsController < ApplicationController
 
   def create
     paid = perform_payment
+
+    if paid
+      current_user.update(subscriber: true)
+      render json: {
+        paid: true,
+        message: 'Thank you for subscribing!'
+      }
+    end
   end
 
   private
@@ -19,5 +27,7 @@ class Api::SubscriptionsController < ApplicationController
       amount: 100*100,
       currency: 'sek'
     )
+
+    charge.paid
   end
 end

@@ -19,8 +19,8 @@ RSpec.describe 'POST /api/subscriptions', type: :request do
       end
 
       it 'is expected to return a correct response' do
-        expected_response = { "paid": true, "message": 'Thank you for subscribing!' }
-        expect(response_json).to eq expected_response
+        expected_response = { message: 'Thank you for subscribing!', paid: true }
+        expect(response_json).to eq expected_response.as_json
       end
 
       it 'is expected to make user a subscriber' do
