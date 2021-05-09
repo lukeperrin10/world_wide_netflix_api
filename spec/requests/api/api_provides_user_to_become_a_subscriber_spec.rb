@@ -1,11 +1,15 @@
 RSpec.describe 'POST /api/subscriptions', type: :request do
-  let(:user) { create(:user) }
-  let(:auth_headers) { user.create_new_auth_token }
+  before(:each) { StripeMock.start }
+  after(:each) { StripeMock.stop }
+
   describe 'successful' do
+    let(:user) { create(:user) }
+    let(:auth_headers) { user.create_new_auth_token }
+    let(:stripe_token) { StripeMock.create_test_helper.generate_card_token }
     before do
       post '/api/subscriptions',
            params: {
-             stripeToken: '0123456789'
+             stripeToken: stripe_token
            },
            headers: auth_headers
     end
@@ -15,7 +19,7 @@ RSpec.describe 'POST /api/subscriptions', type: :request do
     end
 
     it 'is expected to return a correct response' do
-      expected_response = { "paid": true, "message": "Thank you for subscribing!" }
+      expected_response = { "paid": true, "message": 'Thank you for subscribing!' }
       expect(response_json).to eq expected_response
     end
 
