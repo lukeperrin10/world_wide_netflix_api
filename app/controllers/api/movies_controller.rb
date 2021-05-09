@@ -1,5 +1,5 @@
 class Api::MoviesController < ApplicationController
-  before_action :authenticate_user, only: :user_tier_render
+  
 
   def index    
     netflix = Rails.application.credentials.unogsng_key
