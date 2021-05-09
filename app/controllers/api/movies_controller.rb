@@ -3,27 +3,36 @@ class Api::MoviesController < ApplicationController
 
   def index    
     netflix = Rails.application.credentials.unogsng_key
-
+   
     begin
-      response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
-                                headers = { 'x-rapidapi-key': netflix })
-      higher_rated_movies = netflix_sort(response)
-      
-      if params.has_key?(:lat) && params.has_key?(:lon)
-        country = get_country(params)        
-        movie_results = higher_rated_movies.select { |movie| !movie['clist'].include?(country) }
-        if current_user      
-          user_tier_render(movie_results)
-        else
-          visitor_tier_render(movie_results)
-        end
-      else 
+      if params.has_key?(:query)
         if current_user
-          user_tier_render(higher_rated_movies)
+          response = RestClient.get("https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating&query=#{params['query']}",
+            headers = { 'x-rapidapi-key': netflix })
+          user_tier_render(JSON.parse(response))
         else
-          visitor_tier_render(higher_rated_movies)
+          render json: { error: 'You need to have an account to use this feature' }, status: 401
         end
-      end
+      else
+        if params.has_key?(:lat) && params.has_key?(:lon)
+          response = RestClient.get('https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating',
+            headers = { 'x-rapidapi-key': netflix })
+          higher_rated_movies = netflix_sort(response)
+          country = get_country(params)        
+          movie_results = higher_rated_movies.select { |movie| !movie['clist'].include?(country) }
+          if current_user      
+            user_tier_render(movie_results)
+          else
+            visitor_tier_render(movie_results)
+          end
+        else 
+          if current_user
+            user_tier_render(higher_rated_movies)
+          else
+            visitor_tier_render(higher_rated_movies)
+          end
+        end        
+      end 
     rescue StandardError => e
       render json: { error: e.response.description }, status: e.response.code
     end
@@ -41,7 +50,7 @@ class Api::MoviesController < ApplicationController
     results.sort_by { |film| film['avgrating'] }.reverse
   end
 
-  def user_tier_render(movies_to_render)  
+  def user_tier_render(movies_to_render)
       render json: { body: movies_to_render }, status: 200    
   end
 
