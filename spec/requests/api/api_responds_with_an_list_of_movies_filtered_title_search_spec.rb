@@ -20,7 +20,7 @@ RSpec.describe 'GET /api/movies', type: :request do
     end
 
     it 'is expected to return a list of movies related to the search params' do
-      expect(response_json['body']).to eq JSON.parse(title_search)
+      expect(response_json['body']).to eq JSON.parse(title_search)['results']
     end
   end
 
