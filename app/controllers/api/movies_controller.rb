@@ -7,7 +7,7 @@ class Api::MoviesController < ApplicationController
         if current_user.subscriber?
           response = RestClient.get("https://unogsng.p.rapidapi.com/search?type=movie&orderby=rating&query=#{params['query']}",
                                     headers = { 'x-rapidapi-key': netflix })
-          user_tier_render(JSON.parse(response))
+          user_tier_render(JSON.parse(response)['results'])
         else
           render json: { error: 'You need to have an account to use this feature' }, status: 401
         end
